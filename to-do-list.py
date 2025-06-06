@@ -12,3 +12,15 @@ def show_menu():
     )
 
 
+def list_tasks():
+    if not tasks:
+        return
+
+    print("\n=== TAREFAS ATUAIS ===")
+
+    for i in range(len(tasks)):
+        task = tasks[i]
+        task_completion_symbol = "[X]" if task["is_completed"] else "[ ]"
+        print(f"{task_completion_symbol} {i + 1} - {task['description']} ")
+
+
