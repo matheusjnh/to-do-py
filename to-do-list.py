@@ -1,10 +1,14 @@
-menu = """
-To-do List Py
+tasks = []
 
 
-=== MENU ===
-1 - Adicionar tarefa
-2 - Marcar como concluída
-3 - Remover tarefa
-4 - Sair
-"""
+def show_menu():
+    print(
+        "To-do List Py\n\n"
+        "=== MENU ===\n"
+        "1 - Adicionar tarefa\n"
+        "2 - Marcar como concluída\n"
+        "3 - Remover tarefa\n"
+        "4 - Sair"
+    )
+
+
