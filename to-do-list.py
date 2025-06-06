@@ -24,3 +24,22 @@ def list_tasks():
         print(f"{task_completion_symbol} {i + 1} - {task['description']} ")
 
 
+while True:
+    show_menu()
+    list_tasks()
+
+    option = input("\nSelecione a opção: ")
+
+    if option == "1":
+        task_description = input("Descrição da tarefa: ")
+        tasks.append({"description": task_description, "is_completed": False})
+
+    elif option == "2":
+        task_index = int(input("Selecione a tarefa: ")) - 1
+        tasks[task_index]["is_completed"] = True
+
+    elif option == "3":
+        print("opção 3")
+
+    elif option == "4":
+        break
