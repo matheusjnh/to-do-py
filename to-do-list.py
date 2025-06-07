@@ -25,6 +25,13 @@ def list_tasks():
         print(f"{task_completion_symbol} {i + 1} - {task['description']} ")
 
 
+def remove_tasks(task_numbers: str):
+    task_numbers_list = sorted(task_numbers.split(" "), reverse=True)
+    for task_number in task_numbers_list:
+        index = int(task_number) - 1
+        del tasks[index]
+
+
 def clear_console():
     if platform.system() == "Windows":
         os.system("cls")
@@ -50,8 +57,8 @@ while True:
         tasks[task_index]["is_completed"] = True
 
     elif option == "3" or option == "r":
-        task_index = int(input("Qual tarefa você quer remover?: ")) - 1
-        tasks.pop(task_index)
+        task_numbers = input("Especifique as tarefas separadas por espaço: ")
+        remove_tasks(task_numbers)
 
     elif option == "4" or option == "s":
         break
