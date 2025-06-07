@@ -1,3 +1,7 @@
+import os
+import platform
+
+
 def show_menu():
     print(
         "To-do List Py\n\n"
@@ -21,9 +25,17 @@ def list_tasks():
         print(f"{task_completion_symbol} {i + 1} - {task['description']} ")
 
 
+def clear_console():
+    if platform.system() == "Windows":
+        os.system("cls")
+    else:
+        os.system("clear")
+
+
 tasks = []
 
 while True:
+    clear_console()
     show_menu()
     list_tasks()
 
