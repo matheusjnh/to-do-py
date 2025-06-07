@@ -39,7 +39,8 @@ while True:
         tasks[task_index]["is_completed"] = True
 
     elif option == "3":
-        print("opção 3")
+        task_index = int(input("Qual tarefa você quer remover?: ")) - 1
+        tasks.pop(task_index)
 
     elif option == "4":
         break
