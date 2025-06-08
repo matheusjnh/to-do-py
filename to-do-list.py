@@ -51,25 +51,48 @@ def clear_console():
 
 
 tasks = []
+error = ""
 
 while True:
     clear_console()
     show_menu()
     list_tasks()
 
+    if error:
+        print(f"\n\033[93m{error}\033[0m")
+        error = ""
     option = input("\nSelecione a opção: ").lower()
 
     if option == "1" or option == "a":
         task_description = input("Descrição da tarefa: ")
         tasks.append({"description": task_description, "is_completed": False})
 
-    elif option == "2" or option == "m":
-        task_numbers = input("Especifique as tarefas separadas por espaço: ")
-        mark_task_as_done(task_numbers)
+    elif option == "2" or option == "m" or option == "3" or option == "r":
+        task_numbers = ""
+        input_error = ""
 
-    elif option == "3" or option == "r":
-        task_numbers = input("Especifique as tarefas separadas por espaço: ")
-        remove_tasks(task_numbers)
+        while True:
+            try:
+                if input_error:
+                    print(f"\n\033[93m{input_error}\033[0m")
+                    input_error = ""
+
+                task_numbers = input("Especifique as tarefas separadas por espaço: ")
+
+                if option == "2" or option == "m":
+                    mark_task_as_done(task_numbers)
+
+                else:
+                    remove_tasks(task_numbers)
+
+            except (ValueError, IndexError):
+                input_error = "Números inválidos, tente novamente"
+
+            if not input_error:
+                break
 
     elif option == "4" or option == "s":
         break
+
+    else:
+        error = "Opção inválida!"
