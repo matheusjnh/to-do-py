@@ -25,11 +25,11 @@ def list_tasks():
         print(f"{task_completion_symbol} {i + 1} - {task['description']} ")
 
 
-def remove_tasks(task_numbers: str):
+def task_numbers_to_list_indexes(task_numbers: str) -> list[int]:
     task_numbers_list = sorted(task_numbers.split(" "), reverse=True)
-    for task_number in task_numbers_list:
-        index = int(task_number) - 1
-        del tasks[index]
+    task_numbers_list = [int(i) - 1 for i in task_numbers_list]
+    return task_numbers_list
+
 
 
 def clear_console():
