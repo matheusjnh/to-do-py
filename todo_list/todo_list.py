@@ -1,0 +1,88 @@
+from .task import Task
+import os
+import platform
+
+
+class TodoList:
+    def __init__(self):
+        self._tasks: list[Task] = []
+        self._menu_options = [
+            {
+                "call_input": ["1", "a"],
+                "name": "Adicionar nova tarefa",
+                "method": self._handle_add_task,
+            },
+            {
+                "call_input": ["2", "m"],
+                "name": "Marcar tarefa como concluída",
+                "method": self._handle_mark_task_completed,
+            },
+            {
+                "call_input": ["3", "r"],
+                "name": "Remover tarefa",
+                "method": self._handle_remove_task,
+            },
+            {
+                "call_input": ["4", "s"],
+                "name": "Sair",
+                "method": self._handle_exit,
+            },
+        ]
+
+    def _display_menu(self):
+        print(" {:=^40} ".format("MENU"))
+        for i, option in enumerate(self._menu_options):
+            print(f"{i + 1} - {option['name']}")
+
+    def _handle_menu_input(self):
+        user_input = input("Selecione a opção desejada: ")
+
+        for option in self._menu_options:
+            if user_input in option["call_input"]:
+                option["method"]()
+                return
+
+        raise ValueError("Opção inválida")
+
+    def _handle_add_task(self):
+        description = input("Digite a descrição da tarefa: ")
+        self._add_task(Task(description))
+
+    def _add_task(self, task: Task):
+        self._tasks.append(task)
+
+    def _handle_mark_task_completed(self):
+        pass
+
+    def _handle_remove_task(self):
+        pass
+
+    def _handle_exit(self):
+        pass
+
+    def _get_tasks(self) -> list[Task]:
+        return self._tasks
+
+    def _list_tasks(self):
+        if not self._tasks:
+            return
+
+        print(" {:=^40} ".format("TAREFAS"))
+        for i, task in enumerate(self._tasks):
+            task_completion_symbol = (
+                "[X]" if task.get_completion_status is True else "[ ]"
+            )
+            print(f" {task_completion_symbol} {i + 1} - {task.description}")
+
+    def _clear_console(self):
+        if platform.system() == "Windows":
+            os.system("cls")
+        else:
+            os.system("clear")
+
+    def run(self):
+        while True:
+            self._clear_console()
+            self._display_menu()
+            self._list_tasks()
+            self._handle_menu_input()
