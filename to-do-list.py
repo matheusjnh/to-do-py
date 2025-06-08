@@ -31,6 +31,12 @@ def task_numbers_to_list_indexes(task_numbers: str) -> list[int]:
     return task_numbers_list
 
 
+def remove_tasks(task_numbers: str):
+    indexes = task_numbers_to_list_indexes(task_numbers)
+    for i in indexes:
+        del tasks[i]
+
+
 
 def clear_console():
     if platform.system() == "Windows":
