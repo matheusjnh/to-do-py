@@ -37,6 +37,11 @@ def remove_tasks(task_numbers: str):
         del tasks[i]
 
 
+def mark_task_as_done(task_numbers):
+    indexes = task_numbers_to_list_indexes(task_numbers)
+    for i in indexes:
+        tasks[i]["is_completed"] = True
+
 
 def clear_console():
     if platform.system() == "Windows":
@@ -59,8 +64,8 @@ while True:
         tasks.append({"description": task_description, "is_completed": False})
 
     elif option == "2" or option == "m":
-        task_index = int(input("Selecione a tarefa: ")) - 1
-        tasks[task_index]["is_completed"] = True
+        task_numbers = input("Especifique as tarefas separadas por espaço: ")
+        mark_task_as_done(task_numbers)
 
     elif option == "3" or option == "r":
         task_numbers = input("Especifique as tarefas separadas por espaço: ")
