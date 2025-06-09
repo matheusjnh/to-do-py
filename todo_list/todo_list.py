@@ -76,7 +76,12 @@ class TodoList:
         return task_indexes
 
     def _handle_mark_task_completed(self):
-        pass
+        indexes = self._multiple_tasks_input()
+        for i in indexes:
+            self._mark_task_completed(self._tasks[i])
+
+    def _mark_task_completed(self, task: Task):
+        task.is_completed = True
 
     def _handle_remove_task(self):
         pass
