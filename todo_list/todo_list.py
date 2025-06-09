@@ -43,7 +43,7 @@ class TodoList:
                 option["method"]()
                 return
 
-        raise ValueError("Opção inválida")
+        raise ValueError(f"A opção '{user_input}' não é válida.")
 
     def _handle_add_task(self):
         description = input("Digite a descrição da tarefa: ")
