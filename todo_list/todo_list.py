@@ -1,6 +1,7 @@
 from .task import Task
 import os
 import platform
+import re
 
 
 class TodoList:
@@ -50,6 +51,29 @@ class TodoList:
 
     def _add_task(self, task: Task):
         self._tasks.append(task)
+
+    def _multiple_tasks_input(self) -> list[int]:
+        task_numbers_str = input(
+            "Digite os números das tarefas separados por espaço: "
+        ).strip()
+        task_numbers_str = re.sub(r"\s+", " ", task_numbers_str).split(" ")
+        last_valid_tasks_index = len(self._tasks) - 1
+        task_indexes = []
+
+        for i in task_numbers_str:
+            try:
+                index = int(i) - 1
+                if index < 0 or index > last_valid_tasks_index:
+                    raise IndexError(f"A tarefa {i} está fora do intervalo válido.")
+                if index in task_indexes:
+                    print("A tarefa {i} já foi especificada; ignorando duplicata.")
+                    continue
+                task_indexes.append(index)
+            except ValueError:
+                raise ValueError(f"'{i}' Não é um número válido")
+        task_indexes.sort(reverse=True)
+
+        return task_indexes
 
     def _handle_mark_task_completed(self):
         pass
