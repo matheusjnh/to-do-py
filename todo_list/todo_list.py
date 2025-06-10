@@ -85,6 +85,15 @@ class TodoList:
 
     def _handle_remove_task(self):
         task_indexes = self._multiple_tasks_input()
+        confirmation_input = input(
+            "Tem certeza que deseja excluir as tarefas especificadas? (S/N): "
+        ).lower()
+
+        if confirmation_input == "n" or confirmation_input == "":
+            return
+        elif confirmation_input != "s":
+            raise ValueError("Opção inválida.")
+
         for i in task_indexes:
             self._remove_task(i)
 
