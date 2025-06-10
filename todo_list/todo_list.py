@@ -84,7 +84,12 @@ class TodoList:
         task.is_completed = True
 
     def _handle_remove_task(self):
-        pass
+        task_indexes = self._multiple_tasks_input()
+        for i in task_indexes:
+            self._remove_task(i)
+
+    def _remove_task(self, task_index: int):
+        self._tasks.pop(task_index)
 
     def _handle_exit(self):
         pass
