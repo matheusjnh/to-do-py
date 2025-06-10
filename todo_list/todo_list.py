@@ -92,7 +92,7 @@ class TodoList:
         self._tasks.pop(task_index)
 
     def _handle_exit(self):
-        pass
+        exit()
 
     def _get_tasks(self) -> list[Task]:
         return self._tasks
