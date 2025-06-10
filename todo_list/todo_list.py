@@ -103,7 +103,7 @@ class TodoList:
 
         print(" {:=^40} ".format("TAREFAS"))
         for i, task in enumerate(self._tasks):
-            task_completion_symbol = "[X]" if task.is_completed is True else "[ ]"
+            task_completion_symbol = "[X]" if task.is_completed == True else "[ ]"
             print(f"{task_completion_symbol} {i + 1} - {task.description}")
 
     def _clear_console(self):
