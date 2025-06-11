@@ -1,3 +1,4 @@
+from storage_manager.storage_manager_base import StorageManagerBase
 from .task import Task
 import os
 import platform
@@ -6,8 +7,9 @@ from termcolor import colored
 
 
 class TodoList:
-    def __init__(self):
-        self._tasks: list[Task] = []
+    def __init__(self, storage_manager: StorageManagerBase):
+        self._storage = storage_manager
+        self._tasks = self._storage.load()
         self._menu_options = [
             {
                 "call_input": ["1", "a"],
@@ -111,6 +113,7 @@ class TodoList:
         self._tasks.pop(task_index)
 
     def _handle_exit(self):
+        self._storage.save(self._tasks)
         exit()
 
     def _get_tasks(self) -> list[Task]:
