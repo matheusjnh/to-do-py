@@ -2,6 +2,7 @@ from .task import Task
 import os
 import platform
 import re
+from termcolor import colored
 
 
 class TodoList:
@@ -12,34 +13,43 @@ class TodoList:
                 "call_input": ["1", "a"],
                 "name": "Adicionar nova tarefa",
                 "method": self._handle_add_task,
+                "is_enabled": lambda s: True,
             },
             {
                 "call_input": ["2", "m"],
                 "name": "Marcar tarefa como concluída",
                 "method": self._handle_mark_task_completed,
+                "is_enabled": lambda s: bool(s._tasks),
             },
             {
                 "call_input": ["3", "r"],
                 "name": "Remover tarefa",
                 "method": self._handle_remove_task,
+                "is_enabled": lambda s: bool(s._tasks),
             },
             {
                 "call_input": ["4", "s"],
                 "name": "Sair",
                 "method": self._handle_exit,
+                "is_enabled": lambda s: True,
             },
         ]
 
     def _display_menu(self):
         print(" {:=^40} ".format("MENU"))
         for i, option in enumerate(self._menu_options):
-            print(f"{i + 1} - {option['name']}")
+            text = f"{i + 1} - {option['name']}"
+            if not option["is_enabled"](self):
+                text = colored(f"{text} (indisponível)", "dark_grey")
+            print(text)
 
     def _handle_menu_input(self):
         user_input = input("Selecione a opção desejada: ")
 
         for option in self._menu_options:
             if user_input in option["call_input"]:
+                if not option["is_enabled"](self):
+                    return
                 option["method"]()
                 return
 
