@@ -1,8 +1,9 @@
 from pathlib import Path
 from typing import Any
-from storage_manager import StorageManagerBase
-from todo_list.task import Task
 import json
+
+from storage_manager.storage_manager_base import StorageManagerBase
+from todo_list.task import Task
 
 
 class JSONStorageManager(StorageManagerBase):
