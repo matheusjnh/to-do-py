@@ -7,14 +7,10 @@ from todo_list.task import Task
 
 
 class JSONStorageManager(StorageManagerBase):
-    def __init__(self):
+    def __init__(self, filePath: Path):
         super().__init__()
 
-        # Just a temporary way to specify the file path
-        self._filePath = Path(
-            r"C:\Users\TheuJnh\Desktop\dev\python\to-do-list\tasks.json"
-        )
-        print(self._filePath)
+        self._filePath = filePath
 
     def load(self) -> list[Task]:
         try:

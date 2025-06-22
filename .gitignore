@@ -2,3 +2,4 @@ project-features.md
 __pycache__
 .venv/
 tasks.json
+.env

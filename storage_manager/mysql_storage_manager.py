@@ -5,12 +5,11 @@ from todo_list.task import Task
 
 
 class MySQLStorageManager(StorageManagerBase):
-    def __init__(self):
+    def __init__(self, host: str, user: str, passwd: str, database: str):
         super().__init__()
 
-        # Just a temporary handling of the connection
         self._db = mysql.connector.connect(
-            host="localhost", user="root", passwd="", database="todo_list"
+            host=host, user=user, passwd=passwd, database=database
         )
 
     def load(self) -> list[Task]:
